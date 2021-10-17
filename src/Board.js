@@ -14,7 +14,7 @@ class Board extends React.Component {
     this.renderAnt()
 
     return (
-        <label>{this.state.iteration}</label>
+        <div></div>
     )
   }
 
