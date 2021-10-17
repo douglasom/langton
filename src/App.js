@@ -40,8 +40,25 @@ class App extends React.Component {
         {this.header()}
         <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} board={this.state.board} />
         <Timer action={this.antWalk} />
+        Place ant X: <input type="text" onChange={this.setX} /> Y: <input type="text" onChange={this.setY} />
       </div>
     )
+  }
+
+  setX = (event) => {
+    this.setCoordinate("x", event.target.value)
+  }
+
+  setY = (event) => {
+    this.setCoordinate("y", event.target.value)
+  }
+
+  setCoordinate = (xOrY, value) => {
+    if (value) {
+      const ant = this.state.ant
+      ant[xOrY] = value
+      this.setState({ant: ant})
+    }
   }
 
   header = () => {
