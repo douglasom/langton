@@ -1,7 +1,10 @@
 import './App.css';
-import './Canvas.js';
+import Timer from './Timer.js';
 import Canvas from './Canvas.js';
 
+function antWalk() {
+  console.log("another step.")
+}
 function App() {
   return (
     <div className="App">
@@ -11,8 +14,9 @@ function App() {
         </p>
       </header>
       <Canvas />
+      <Timer action={antWalk} />
     </div>
-  );
+  )
 }
 
 export default App;
