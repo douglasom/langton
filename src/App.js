@@ -23,7 +23,6 @@ class App extends React.Component {
     const board = this.createBoard()
     this.state = {
       ant: new Ant(board, 300, 200),
-      iteration: 0,
       board: board
     }
   }
@@ -31,18 +30,15 @@ class App extends React.Component {
   antWalk = () => {
     const ant = this.state.ant
     ant.move()
-    const iteration = this.state.iteration + 1
-    console.log("stepped on (" + ant.x + ", " + ant.y + "), iteration " + iteration)
     this.setState({
-      ant: ant,
-      iteration: iteration
+      ant: ant
     })
   }
   render = () => {
     return (
       <div className="App">
         {this.header()}
-        <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} iteration={this.state.iteration} board={this.state.board} />
+        <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} board={this.state.board} />
         <Timer action={this.antWalk} />
       </div>
     )

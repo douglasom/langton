@@ -5,8 +5,7 @@ class Board extends React.Component {
     super(props)
     this.state = {
       board: this.props.board,
-      ant: this.props.ant,
-      iteration: this.props.iteration
+      ant: this.props.ant
     }
   }
 
