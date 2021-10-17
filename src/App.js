@@ -1,22 +1,59 @@
 import './App.css';
 import Timer from './Timer.js';
-import Canvas from './Canvas.js';
+import Board from './Board.js';
+import Ant from './Ant.js';
+import React from 'react';
 
-function antWalk() {
-  console.log("another step.")
-}
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Langton's Ant.
-        </p>
-      </header>
-      <Canvas />
-      <Timer action={antWalk} />
-    </div>
-  )
+class App extends React.Component {
+
+  createBoard = () => {
+    const w = 400
+    const h = 400
+    const board = []
+    for (let i = 0; i < w; i++) {
+      board[i] = []
+      board[i].fill(false, 0, h)
+    }
+    return board
+  }
+
+  constructor() {
+    super()
+    const board = this.createBoard()
+    this.state = {
+      ant: new Ant(board),
+      iteration: 0,
+      board: board
+    }
+  }
+
+  antWalk = () => {
+    const ant = this.state.ant
+    ant.move()
+    const iteration = this.state.iteration + 1
+    console.log("stepped on (" + ant.x + ", " + ant.y + "), iteration " + iteration)
+    this.setState({
+      ant: ant,
+      iteration: iteration
+    })
+  }
+  render = () => {
+    return (
+      <div className="App">
+        {this.header()}
+        <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} iteration={this.state.iteration} />
+        <Timer action={this.antWalk} />
+      </div>
+    )
+  }
+
+  header = () => {
+    return <header className="App-header">
+      <p>
+        Langton's Ant.
+      </p>
+    </header>
+  }
 }
 
 export default App;
