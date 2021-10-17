@@ -1,9 +1,10 @@
 import React from "react"
 
 class Timer extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
+            limitNumOfIterations: 2000,
             iterations: 0,
             startStopLabel: "Start"
         }
@@ -22,7 +23,7 @@ class Timer extends React.Component {
     }
     
     start = () => {
-        const intervalId = setInterval(this.run, 2)
+        const intervalId = setInterval(this.run, 5)
         this.setState({
             intervalId: intervalId,
             startStopLabel: "Stop"
@@ -44,14 +45,33 @@ class Timer extends React.Component {
     }
 
     run = () => {
-        this.setState({
-            iterations: this.state.iterations + 1
-        })
-        this.props.action()
+        if (this.state.iterations < this.state.limitNumOfIterations) {
+            this.setState({
+                iterations: this.state.iterations + 1
+            })
+            this.props.action()
+        }
     }
+
+    setLimitNumOfIterations = (event) => {
+        if (event.target.value) {
+          const value = parseInt(event.target.value)
+          const min = 1
+          const max = 2000
+          if (value < min || value > max) {
+            window.alert("limit num of iterations should be between " + min + " and " + max)
+          } else {
+            this.setState({
+              limitNumOfIterations: value
+            })
+          }
+        }
+      }
+    
     
     render() {
         return <div>
+            <div>Limit num of iterations: <input type="text" onBlur={this.setLimitNumOfIterations} /></div>
             <button onClick={this.startStop}>{this.state.startStopLabel}</button> <label>Iterations: {this.state.iterations}</label>
         </div>
     }

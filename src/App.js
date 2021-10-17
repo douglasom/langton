@@ -7,7 +7,6 @@ import React from 'react';
 class App extends React.Component {
 
   createBoard = () => {
-    const marginFactorForOverflow = 10
     const w = 600
     const h = 400
     const board = []
@@ -22,6 +21,7 @@ class App extends React.Component {
     super()
     const board = this.createBoard()
     this.state = {
+      limitNumOfIterations: 20000,
       ant: new Ant(board, 300, 200),
       board: board
     }
@@ -40,7 +40,7 @@ class App extends React.Component {
         {this.header()}
         <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} board={this.state.board} />
         <Timer action={this.antWalk} />
-        Place ant X: <input type="text" onChange={this.setX} /> Y: <input type="text" onChange={this.setY} />
+        <div>Place ant X: <input type="text" onBlur={this.setX} /> Y: <input type="text" onBlur={this.setY} /></div>
       </div>
     )
   }
