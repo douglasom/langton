@@ -4,19 +4,43 @@ class Timer extends React.Component {
     constructor() {
         super()
         this.state = {
-            iterations: 0
+            iterations: 0,
+            startStopLabel: "Start"
         }
     }
 
-    start = () => {
-        const intervalId = setInterval(this.run, 1000)
-        this.setState({intervalId: intervalId})
+    startStop = () => {
+        if (this.running()) {
+            this.stop()
+        } else {
+            this.start()
+        }
     }
 
     componentWillUnmount = () => {
+        this.stop()
+    }
+    
+    start = () => {
+        const intervalId = setInterval(this.run, 1000)
+        this.setState({
+            intervalId: intervalId,
+            startStopLabel: "Stop"
+        })
+    }
+
+    stop = () => {
         if (this.state.intervalId) {
             clearInterval(this.state.intervalId)
+            this.setState({
+                intervalId: null,
+                startStopLabel: "Start"
+            })
         }
+    }
+
+    running = () => {
+        return this.state.intervalId != null
     }
 
     run = () => {
@@ -28,7 +52,7 @@ class Timer extends React.Component {
     
     render() {
         return <div>
-            <button onClick={this.start}>Start</button> <label>Iterations: {this.state.iterations}</label>
+            <button onClick={this.startStop}>{this.state.startStopLabel}</button> <label>Iterations: {this.state.iterations}</label>
         </div>
     }
     
