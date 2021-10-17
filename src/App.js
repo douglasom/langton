@@ -41,7 +41,7 @@ class App extends React.Component {
     return (
       <div className="App">
         {this.header()}
-        <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} iteration={this.state.iteration} />
+        <Board ant={this.state.ant} antCanvas={document.getElementById("antCanvas")} iteration={this.state.iteration} board={this.state.board} />
         <Timer action={this.antWalk} />
       </div>
     )

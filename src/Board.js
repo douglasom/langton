@@ -22,7 +22,11 @@ class Board extends React.Component {
   renderAnt = () => {
     const canvas = this.props.antCanvas
     const ctx = canvas.getContext("2d")
-    ctx.fillStyle = 'black'
+    if (this.state.board && this.state.board[this.state.ant.x][this.state.ant.y]) {
+      ctx.fillStyle = 'white'
+    } else {
+      ctx.fillStyle = 'black'
+    }
     ctx.fillRect(this.state.ant.x, this.state.ant.y, 1, 1)
   }
 }

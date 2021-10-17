@@ -22,7 +22,7 @@ class Timer extends React.Component {
     }
     
     start = () => {
-        const intervalId = setInterval(this.run, 10)
+        const intervalId = setInterval(this.run, 2)
         this.setState({
             intervalId: intervalId,
             startStopLabel: "Stop"
