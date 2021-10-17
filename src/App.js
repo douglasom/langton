@@ -7,7 +7,8 @@ import React from 'react';
 class App extends React.Component {
 
   createBoard = () => {
-    const w = 400
+    const marginFactorForOverflow = 10
+    const w = 600
     const h = 400
     const board = []
     for (let i = 0; i < w; i++) {
@@ -21,7 +22,7 @@ class App extends React.Component {
     super()
     const board = this.createBoard()
     this.state = {
-      ant: new Ant(board),
+      ant: new Ant(board, 300, 200),
       iteration: 0,
       board: board
     }

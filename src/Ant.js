@@ -1,8 +1,8 @@
 class Ant {
-    constructor(board) {
+    constructor(board, x, y) {
         this.board = board
-        this.x = 50
-        this.y = 50
+        this.x = x
+        this.y = y
         this.direction = Ant.UP
     }
 
